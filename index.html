@@ -6,6 +6,16 @@
     <script src="https:/unpkg.com/vue@3.0.2"></script>
     <script>var exports = {};</script>
     <title>Learning Vue</title>
+    <style>
+        .box {
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
     <h1>Hello Vue :)</h1>
@@ -24,6 +34,16 @@
         </button>
         <!-- Show toggles displaying the element via css. Computationally cheaper than removing/adding to DOM like with v-if -->
         <div v-show="showBooks">currently showing books</div>
+
+        <br>
+        <!-- more mouse events -->
+        <!-- $event says to explicitly pass the event object in as the first argument, then we can pass in other
+        position arguments following that. If no arguments provided, $event is implicitly the first argument.
+        If some arguments are provided, $event has to be explicitly passed. -->
+        <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent">mouseleave</div>
+        <div class="box" @dblclick="handleEvent">double click</div>
+        <div class="box" @mousemove="handleMouseMove">position: {{ x }}, {{ y }}</div>
     </div>
     <script src="app.js"></script>
 </body>
