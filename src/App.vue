@@ -3,7 +3,10 @@
   <p>Welcome...</p>
   <div v-if="showModal">
   <!-- Below only works after it has been imported and registered as a component -->
-  <Modal :header="header" :text="text" theme="sale" @close="toggleModal" />
+  <Modal theme="sale" @close="toggleModal">
+    <h1>Giveaway!</h1>
+    <p>Grab your swag for half price!</p>
+  </Modal>
   </div>
   <button @click.alt="toggleModal">open modal (alt)</button>
 </template>
