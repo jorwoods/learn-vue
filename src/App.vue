@@ -4,6 +4,10 @@
   <div v-if="showModal">
   <!-- Below only works after it has been imported and registered as a component -->
   <Modal theme="sale" @close="toggleModal">
+    <template v-slot:links>
+      <a href="#">Sign up now!</a>
+      <a href="#">more info</a>
+    </template>
     <h1>Giveaway!</h1>
     <p>Grab your swag for half price!</p>
   </Modal>

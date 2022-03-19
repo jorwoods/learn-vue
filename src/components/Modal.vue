@@ -2,7 +2,10 @@
   <div class="backdrop" @click.self="closeModal">
     <!-- Conditional classes. Key is the class that we may want to bind. Value is the boolean -->
     <div class="modal" :class="{ sale : theme === 'sale' }">
-      <slot></slot>
+      <slot>Default content</slot>
+      <div class="actions">
+        <slot name="links"></slot>
+      </div>
     </div>
   </div>
 </template>
