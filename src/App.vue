@@ -3,7 +3,7 @@
   <input type="text" ref="name">
   <button @click="handleClick">click me</button>
   <!-- Below only works after it has been imported and registered as a component -->
-  <Modal header="Sign up for the Giveaway!" text="Grab your swag for half price!" />
+  <Modal :header="header" :text="text" />
 </template>
 
 <script>
@@ -13,7 +13,9 @@ export default {
   name: 'App',
   data () {
     return {
-      title: 'My First Vue App :)'
+      title: 'My First Vue App :)',
+      header: "Sign up for the Giveaway!",
+      text: "Grab your swag for half price!",
     }
   },
   components: {
