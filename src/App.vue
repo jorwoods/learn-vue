@@ -2,10 +2,12 @@
   <h1>{{ title }}</h1>
   <input type="text" ref="name">
   <button @click="handleClick">click me</button>
+  <!-- Below only works after it has been imported and registered as a component -->
+  <Modal /> 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Modal from './components/Modal.vue'
 
 export default {
   name: 'App',
@@ -15,7 +17,7 @@ export default {
     }
   },
   components: {
-    HelloWorld
+    Modal
   },
   methods: {
     handleClick () {
