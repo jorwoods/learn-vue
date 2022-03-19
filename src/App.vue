@@ -5,7 +5,7 @@
   <!-- Below only works after it has been imported and registered as a component -->
   <Modal :header="header" :text="text" theme="sale" @close="toggleModal" />
   </div>
-  <button @click="toggleModal">open modal</button>
+  <button @click.alt="toggleModal">open modal (alt)</button>
 </template>
 
 <script>

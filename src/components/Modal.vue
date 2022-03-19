@@ -1,5 +1,5 @@
 <template>
-  <div class="backdrop" @click="closeModal">
+  <div class="backdrop" @click.self="closeModal">
     <!-- Conditional classes. Key is the class that we may want to bind. Value is the boolean -->
     <div class="modal" :class="{ sale : theme === 'sale' }">
       <h1>{{ header }}</h1>
