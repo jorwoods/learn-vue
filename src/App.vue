@@ -1,7 +1,7 @@
 <template>
   <h1>{{ title }}</h1>
   <p>Welcome...</p>
-  <div v-if="showModal">
+  <teleport to="div#modals" v-if="showModal">
     <!-- Below only works after it has been imported and registered as a component -->
     <Modal theme="sale" @close="toggleModal">
       <template v-slot:links>
@@ -11,8 +11,8 @@
       <h1>Giveaway!</h1>
       <p>Grab your swag for half price!</p>
     </Modal>
-  </div>
-  <div v-if="showModal2">
+  </teleport>
+  <teleport to="div#modals" v-if="showModal2">
     <Modal @close="toggleModal2">
       <template v-slot:links>
         <a href="#">Sign up now!</a>
@@ -21,7 +21,7 @@
       <h1>More information!</h1>
       <p>Terms and conditions may apply.</p>
     </Modal>
-  </div>
+  </teleport>
   <button @click.alt="toggleModal">open modal (alt)</button>
   <button @click="toggleModal2">open modal 2</button>
 </template>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style>
-#app {
+#app, #modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
