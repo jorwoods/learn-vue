@@ -1,6 +1,7 @@
 <template>
-  <div class="backdrop">
-    <div class="modal">
+  <div class="backdrop" @click="closeModal">
+    <!-- Conditional classes. Key is the class that we may want to bind. Value is the boolean -->
+    <div class="modal" :class="{ sale : theme === 'sale' }">
       <h1>{{ header }}</h1>
       <p>{{ text }}</p>
     </div>
@@ -9,7 +10,12 @@
 
 <script>
 export default {
-  props: ['header', 'text']
+  props: ['header', 'text', 'theme'],
+  methods: {
+    closeModal () {
+      this.$emit('close')
+    }
+  }
 }
 </script>
 
@@ -32,5 +38,12 @@ export default {
     color: #03cfb4;
     border: none;
     padding: 0;
+  }
+  .modal.sale{
+    background: crimson;
+    color: white;
+  }
+  .modal.sale h1 {
+    color: white;
   }
 </style>

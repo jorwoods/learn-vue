@@ -1,9 +1,11 @@
 <template>
   <h1>{{ title }}</h1>
-  <input type="text" ref="name">
-  <button @click="handleClick">click me</button>
+  <p>Welcome...</p>
+  <div v-if="showModal">
   <!-- Below only works after it has been imported and registered as a component -->
-  <Modal :header="header" :text="text" />
+  <Modal :header="header" :text="text" theme="sale" @close="toggleModal" />
+  </div>
+  <button @click="toggleModal">open modal</button>
 </template>
 
 <script>
@@ -16,6 +18,7 @@ export default {
       title: 'My First Vue App :)',
       header: "Sign up for the Giveaway!",
       text: "Grab your swag for half price!",
+      showModal: false,
     }
   },
   components: {
@@ -26,6 +29,10 @@ export default {
       console.log(this.$refs.name)
       this.$refs.name.classList.add('active')
       this.$refs.name.focus()
+    },
+
+    toggleModal () {
+      this.showModal = ! this.showModal
     }
   }
 }
