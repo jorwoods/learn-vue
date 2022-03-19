@@ -3,7 +3,7 @@
   <input type="text" ref="name">
   <button @click="handleClick">click me</button>
   <!-- Below only works after it has been imported and registered as a component -->
-  <Modal />
+  <Modal header="Sign up for the Giveaway!" text="Grab your swag for half price!" />
 </template>
 
 <script>
