@@ -1,21 +1,32 @@
 <template>
-  <h1>{{ title }}</h1>
+  <h1>Ninja Reaction Timer</h1>
+  <button @click="start" :disabled="isPlaying">play</button>
+  <Block v-if="isPlaying" :delay="delay"/>
 </template>
 
 <script>
+
+import Block from "./components/Block.vue"
+import Results from "./components/Results.vue"
 
 export default {
   name: "App",
   data() {
     return {
-
+      isPlaying: false,
+      delay: null,
     };
   },
   components: {
-
+    Block,
+    Results,
   },
   methods: {
-
+    start() {
+      this.delay = 2000 + Math.random() * 5000
+      this.isPlaying = true
+      // console.log(this.delay)
+    }
   },
 };
 </script>
@@ -26,7 +37,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #444;
   margin-top: 60px;
 }
 
