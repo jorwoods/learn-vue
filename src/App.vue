@@ -1,13 +1,13 @@
 <template>
   <h1>Ninja Reaction Timer</h1>
   <button @click="start" :disabled="isPlaying">play</button>
-  <Block v-if="isPlaying" :delay="delay"/>
+  <Block v-if="isPlaying" :delay="delay" @end="endGame" />
+  <p v-if="score">Reaction Time: {{ score }}ms</p>
 </template>
 
 <script>
-
-import Block from "./components/Block.vue"
-import Results from "./components/Results.vue"
+import Block from "./components/Block.vue";
+import Results from "./components/Results.vue";
 
 export default {
   name: "App",
@@ -15,6 +15,7 @@ export default {
     return {
       isPlaying: false,
       delay: null,
+      score: null,
     };
   },
   components: {
@@ -23,16 +24,21 @@ export default {
   },
   methods: {
     start() {
-      this.delay = 2000 + Math.random() * 5000
-      this.isPlaying = true
+      this.delay = 2000 + Math.random() * 5000;
+      this.isPlaying = true;
       // console.log(this.delay)
-    }
+    },
+    endGame(reactionTime) {
+      this.score = reactionTime
+      this.isPlaying = false
+    },
   },
 };
 </script>
 
 <style>
-#app, #modals {
+#app,
+#modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,5 +46,4 @@ export default {
   color: #444;
   margin-top: 60px;
 }
-
 </style>
