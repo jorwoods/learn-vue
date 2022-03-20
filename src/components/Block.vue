@@ -18,13 +18,7 @@ export default {
       this.showBlock = true
       console.log(this.delay)
     }, this.delay)
-  },
-   updated () {
-     console.log("Block component updated")
-   },
-   unmounted () {
-     console.log("Block component unmounted")
-   }
+  }
 }
 </script>
 
