@@ -1,4 +1,4 @@
-# learn-vue
+# dojo-blog
 
 ## Project setup
 ```
