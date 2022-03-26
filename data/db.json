@@ -1,7 +1,24 @@
 {
-  "jobs": [
-    {"title": "Ninja UX Designer", "id": 1, "details": "lorem"},
-    {"title": "Ninja Web Developer", "id": 2, "details": "lorem"},
-    {"title": "Ninja Vue Developer", "id": 3, "details": "lorem"}
+  "posts": [
+    {
+      "id": 1,
+      "title": "welcome to the new blog",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo harum minus illo ut et repellendus nemo eos molestias aliquid nisi quasi recusandae autem aspernatur accusamus, error fugiat facere voluptate nulla.",
+      "tags": [
+        "webdev",
+        "coding",
+        "news"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "top 5 CSS tips",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo harum minus illo ut et repellendus nemo eos molestias aliquid nisi quasi recusandae autem aspernatur accusamus, error fugiat facere voluptate nulla.",
+      "tags": [
+        "webdev",
+        "coding",
+        "css"
+      ]
+    }
   ]
 }
