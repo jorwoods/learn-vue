@@ -1,7 +1,16 @@
 {
-  "jobs": [
-    {"title": "Ninja UX Designer", "id": 1, "details": "lorem"},
-    {"title": "Ninja Web Developer", "id": 2, "details": "lorem"},
-    {"title": "Ninja Vue Developer", "id": 3, "details": "lorem"}
+  "projects": [
+    {
+      "id": 1,
+      "title": "Create new homepage banner",
+      "details": "Lorem ipsum",
+      "complete": false
+    },
+    {
+      "id": 2,
+      "title": "Make marketing email",
+      "details": "Lorem ipsum",
+      "complete": true
+    }
   ]
 }

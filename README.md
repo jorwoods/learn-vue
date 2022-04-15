@@ -1,4 +1,4 @@
-# learn-vue
+# project-planner
 
 ## Project setup
 ```
