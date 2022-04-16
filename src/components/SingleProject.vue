@@ -37,8 +37,8 @@ const handleDisplay = () => {
 
 
 const deleteProject = () => {
-  fetch([database_url, props.project.id].join("/"), {method: "DELETE"})
-    .then(() => emit('delete', props.project.id) )
+  fetch([database_url, props?.project?.id].join("/"), {method: "DELETE"})
+    .then(() => emit('delete', props?.project?.id) )
     .catch(err => console.log(err.message))
 }
 
