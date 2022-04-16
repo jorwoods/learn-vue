@@ -11,6 +11,18 @@
       "title": "Make marketing email",
       "details": "Lorem ipsum",
       "complete": true
+    },
+    {
+      "title": "Make a website",
+      "details": "blah blah blah",
+      "complete": false,
+      "id": 3
+    },
+    {
+      "title": "Add routing",
+      "details": "Add routing from vue-router",
+      "complete": true,
+      "id": 4
     }
   ]
 }

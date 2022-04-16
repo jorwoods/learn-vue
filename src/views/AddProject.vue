@@ -10,13 +10,32 @@
 
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import ProjectItem from "@/types/ProjectItem"
+
 const title = ref('')
 const details = ref('')
 
+const router = useRouter()
+const route = useRoute()
+
 const hanldeSubmit = () => {
   console.log(title.value, details.value);
+  const project: ProjectItem = {
+    title: title.value,
+    details: details.value,
+    complete: false,
+  }
 
+  const database_url = "http://localhost:3000/projects" // inject("database_url") as string
+  fetch(database_url, {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(project)
+  }).then(() => {
+    router.push({name:"home"})
+  }).catch(err => console.log(err))
 }
 
 </script>
