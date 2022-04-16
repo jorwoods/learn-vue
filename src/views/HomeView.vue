@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { defineComponent, inject, computed, onMounted, ref } from "vue";
-import loadProjects from "@/func/getProjects";
+import loadProjects from "@/composables/getProjects";
 import ProjectItem from "@/types/ProjectItem";
 import SingleProject from "@/components/SingleProject.vue"
 import FilterNav from "@/components/FilterNav.vue"
@@ -23,8 +23,6 @@ let { projects, error, load } = loadProjects(database_url);
 let currentFilter = ref("all")
 
 load()
-
-projects = ref(projects)
 
 const handleDelete = (id: number) => {
   projects.value = projects.value.filter((project) => {
