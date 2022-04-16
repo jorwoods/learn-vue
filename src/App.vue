@@ -1,9 +1,11 @@
 <template>
+  <Navbar />
   <router-view/>
 </template>
 
 <script setup lang="ts">
 import { provide } from 'vue'
+import Navbar from "@/components/Navbar.vue"
 
 provide('database_url', "http://localhost:3000/projects")
 </script>
