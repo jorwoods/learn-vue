@@ -2,14 +2,14 @@
   <div class="home">
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <SingleProject :project="project" />
+        <SingleProject :project="project" @delete="handleDelete" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, inject, onMounted, ref } from "vue";
 import loadProjects from "@/func/getProjects";
 import ProjectItem from "@/types/ProjectItem";
 import SingleProject from "@/components/SingleProject.vue"
@@ -19,13 +19,21 @@ export default defineComponent({
   components: { SingleProject },
   setup() {
 
-    let { projects, error, load } = loadProjects();
+    const database_url = inject("database_url") as string
+
+    let { projects, error, load } = loadProjects(database_url);
 
     load()
 
     projects = ref(projects)
 
-    return { projects }
+    const handleDelete = (id: number) => {
+      projects.value = projects.value.filter((project) => {
+        return project.id != id
+      })
+    }
+
+    return { handleDelete, projects }
   },
 });
 </script>

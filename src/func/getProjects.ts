@@ -1,12 +1,12 @@
 import { ref } from "vue"
 import ProjectItem from "@/types/ProjectItem"
 
-const loadProjects = () => {
+const loadProjects = (url: string) => {
   const projects = ref<ProjectItem[]>([])
   const error = ref<string | null>(null)
   const load = async () => {
     try {
-      const data = await fetch("http://localhost:3000/projects")
+      const data = await fetch(url)
       if (!data.ok){
         throw Error("No data available")
       }

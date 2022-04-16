@@ -2,6 +2,12 @@
   <router-view/>
 </template>
 
+<script setup lang="ts">
+import { provide } from 'vue'
+
+provide('database_url', "http://localhost:3000/projects")
+</script>
+
 <style>
 body{
   background: #f2f2f2;
