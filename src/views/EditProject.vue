@@ -11,21 +11,21 @@
 
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, useAttrs } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import ProjectItem from "@/types/ProjectItem"
 
+const router = useRouter()
 const route = useRoute()
-
-console.log(route);
-console.log(route.params["id"]);
+const attrs = useAttrs()
+const database_url = "http://localhost:3000/projects"
+const uri = [database_url, route.params.id].join("/")
 
 const title = ref('')
 const details = ref('')
 
 onMounted(() => {
-  const database_url = "http://localhost:3000/projects"
-  const uri = [database_url, route.params.id].join("/")
+
   fetch(uri)
     .then(res => res.json())
     .then(data => {
@@ -36,7 +36,16 @@ onMounted(() => {
 })
 
 const hanldeSubmit = () => {
-
+  fetch(uri, {
+    method: "PATCH",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      title: title.value,
+      details: details.value
+    })
+  }).then(() => {
+    router.push({ name: "home" })
+  }).catch(err => console.log(err))
 }
 
 </script>
