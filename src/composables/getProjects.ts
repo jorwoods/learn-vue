@@ -10,11 +10,14 @@ const loadProjects = () => {
   const load = async () => {
     try {
 
-      const response = await projectFirestore.collection('projects').get()
-      projects.value = response.docs.map(doc => {
-        return { ...doc.data() as ProjectBase, id: doc.id }
-      })
-
+      const response = await projectFirestore.collection('projects')
+        .orderBy("updated_at", "desc")
+        .onSnapshot((snap) => {
+          let docs = snap.docs.map((doc) => {
+            return { ...doc.data() as ProjectBase, id: doc.id }
+          })
+          projects.value = docs
+        })
     } catch (err: unknown) {
       if (err instanceof Error) {
         error.value = err.message
