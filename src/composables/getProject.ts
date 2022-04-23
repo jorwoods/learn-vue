@@ -3,17 +3,20 @@ import { ProjectBase, ProjectItem } from "@/types/ProjectItem"
 
 import { projectFirestore } from '@/firebase/config'
 
-const loadProjects = () => {
-  const projects = ref<ProjectItem[]>([])
+const getProject = (id: string) => {
+  const project = ref<ProjectItem>()
   const error = ref<string | null>(null)
 
   const load = async () => {
     try {
 
-      const response = await projectFirestore.collection('projects').get()
-      projects.value = response.docs.map(doc => {
-        return { ...doc.data() as ProjectBase, id: doc.id }
-      })
+      const response = await projectFirestore.collection('projects').doc(id).get()
+
+      if (!response.exists){
+        throw Error("Project does not exist")
+      }
+
+      project.value = { ...response.data() as ProjectBase, id: response.id}
 
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -23,7 +26,7 @@ const loadProjects = () => {
     }
   }
 
-  return { projects: projects, error, load }
+  return { project, error, load }
 }
 
-export default loadProjects
+export default getProject

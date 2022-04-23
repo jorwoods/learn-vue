@@ -1,28 +1,22 @@
 {
   "projects": [
     {
-      "id": 1,
-      "title": "Create new homepage banner",
-      "details": "Lorem ipsum",
-      "complete": true
+      "title": "Model a \"data poor\" market",
+      "details": "In Einstein Discovery, model a market that has less information than the one used for the pilot.",
+      "complete": false,
+      "id": 1
     },
     {
-      "id": 2,
-      "title": "Make marketing email with mailchimp",
-      "details": "Lorem ipsum",
-      "complete": true
+      "title": "Model GNS",
+      "details": "Expand the DE model to include CH+NL",
+      "complete": false,
+      "id": 2
     },
     {
-      "title": "Make a website",
-      "details": "blah blah blah",
+      "title": "Avg term granularity",
+      "details": "Average terminations highly correlated with other features. Back out granularity of it to a boolean over the last 12 months to see if it adds information.",
       "complete": false,
       "id": 3
-    },
-    {
-      "title": "Add routing",
-      "details": "Add routing from vue-router",
-      "complete": true,
-      "id": 4
     }
   ]
 }

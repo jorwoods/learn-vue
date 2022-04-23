@@ -24,6 +24,8 @@
 import { defineEmits, defineProps, PropType, ref, inject } from 'vue'
 
 import ProjectItem from "@/types/ProjectItem";
+import { projectFirestore } from '@/firebase/config';
+import updateProject from '@/composables/updateProject';
 
 const emit = defineEmits(['delete', 'complete'])
 const props = defineProps({
@@ -38,21 +40,22 @@ const handleDisplay = () => {
 }
 
 
-const deleteProject = () => {
-  fetch([database_url, props?.project?.id].join("/"), { method: "DELETE" })
-    .then(() => emit('delete', props?.project?.id))
-    .catch(err => console.log(err.message))
+const deleteProject = async () => {
+  const response = await projectFirestore.collection('projects')
+                          .doc(props?.project?.id)
+                          .delete()
+
+  emit('delete', props?.project?.id)
+
 }
 
 const toggleComplete = () => {
-  fetch([database_url, props?.project?.id].join("/"), {
-    method: "PATCH",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ complete: !props?.project?.complete })
-  })
+  const { updateError, update } = updateProject(props?.project?.id!)
+  update({complete: !props?.project?.complete})
     .then(() => {
       emit('complete', props?.project?.id)
-    }).catch(err => console.log(err))
+    })
+
 }
 
 </script>

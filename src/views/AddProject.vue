@@ -10,9 +10,10 @@
 
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import ProjectItem from "@/types/ProjectItem"
+import { ProjectBase, ProjectItem } from "@/types/ProjectItem"
+import { projectFirestore } from '@/firebase/config';
 
 const title = ref('')
 const details = ref('')
@@ -20,22 +21,12 @@ const details = ref('')
 const router = useRouter()
 const route = useRoute()
 
-const hanldeSubmit = () => {
-  console.log(title.value, details.value);
-  const project: ProjectItem = {
-    title: title.value,
-    details: details.value,
-    complete: false,
-  }
+const hanldeSubmit = async () => {
 
-  const database_url = "http://localhost:3000/projects" // inject("database_url") as string
-  fetch(database_url, {
-    method: "POST",
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(project)
-  }).then(() => {
-    router.push({name:"home"})
-  }).catch(err => console.log(err))
+  const project = new ProjectBase(title.value, details.value)
+  const response = await projectFirestore.collection('projects').add({ ...project })
+
+  router.push({name:"home"})
 }
 
 </script>

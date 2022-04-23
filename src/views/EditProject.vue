@@ -14,38 +14,38 @@
 import { onMounted, ref, useAttrs } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import ProjectItem from "@/types/ProjectItem"
+import { projectFirestore } from '@/firebase/config';
+import updateProject from '@/composables/updateProject';
+import getProject from '@/composables/getProject';
 
 const router = useRouter()
 const route = useRoute()
 const attrs = useAttrs()
-const database_url = "http://localhost:3000/projects"
-const uri = [database_url, route.params.id].join("/")
 
 const title = ref('')
 const details = ref('')
 
 onMounted(() => {
 
-  fetch(uri)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      title.value = data.title
-      details.value = data.details
-    })
+  const { project, error, load } = getProject(route.params.id as string)
+  load().then(() => {
+    title.value = project?.value?.title!
+    details.value = project?.value?.details!
+  })
+
 })
 
-const hanldeSubmit = () => {
-  fetch(uri, {
-    method: "PATCH",
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      title: title.value,
-      details: details.value
-    })
-  }).then(() => {
-    router.push({ name: "home" })
-  }).catch(err => console.log(err))
+const hanldeSubmit = async () => {
+  const body = {
+    title: title.value,
+    details: details.value,
+    updated_at: new Date(),
+  }
+  const {updateError, update} = updateProject(route.params.id as string)
+  update(body)
+
+  router.push({name: "home"})
+
 }
 
 </script>

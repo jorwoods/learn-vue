@@ -10,27 +10,25 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, inject, computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import loadProjects from "@/composables/getProjects";
 import ProjectItem from "@/types/ProjectItem";
 import SingleProject from "@/components/SingleProject.vue"
 import FilterNav from "@/components/FilterNav.vue"
 
-const database_url = inject("database_url") as string
-
-let { projects, error, load } = loadProjects(database_url);
+let { projects, error, load } = loadProjects();
 
 let currentFilter = ref("all")
 
 load()
 
-const handleDelete = (id: number) => {
+const handleDelete = (id: string) => {
   projects.value = projects.value.filter((project) => {
     return project.id != id
   })
 }
 
-const handleComplete = (id: number) => {
+const handleComplete = (id: string) => {
   let p = projects.value.find(project => project.id === id)
   p!.complete = !p?.complete
 }
