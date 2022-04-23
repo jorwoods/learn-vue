@@ -26,7 +26,7 @@ const hanldeSubmit = async () => {
   const project = new ProjectBase(title.value, details.value)
   const response = await projectFirestore.collection('projects').add({ ...project })
 
-  router.push({name:"home"})
+  router.push({ name: "home" })
 }
 
 </script>

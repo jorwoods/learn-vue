@@ -1,17 +1,20 @@
-export class ProjectBase  {
+import { timestamp } from "@/firebase/config"
+import firebase from "firebase/app"
+
+export class ProjectBase {
   title: string;
   details: string;
   complete: boolean;
-  created_at: Date
-  updated_at: Date
+  created_at: firebase.firestore.FieldValue
+  updated_at: firebase.firestore.FieldValue
 
-  constructor (title: string, details: string) {
+  constructor(title: string, details: string) {
     this.title = title
     this.details = details
     this.complete = false
 
-    this.created_at = new Date();
-    this.updated_at = new Date();
+    this.created_at = timestamp();
+    this.updated_at = timestamp();
   }
 }
 

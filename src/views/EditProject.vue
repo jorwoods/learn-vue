@@ -14,7 +14,7 @@
 import { onMounted, ref, useAttrs } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import ProjectItem from "@/types/ProjectItem"
-import { projectFirestore } from '@/firebase/config';
+import { projectFirestore, timestamp } from '@/firebase/config';
 import updateProject from '@/composables/updateProject';
 import getProject from '@/composables/getProject';
 
@@ -39,12 +39,12 @@ const hanldeSubmit = async () => {
   const body = {
     title: title.value,
     details: details.value,
-    updated_at: new Date(),
+    updated_at: timestamp(),
   }
-  const {updateError, update} = updateProject(route.params.id as string)
+  const { updateError, update } = updateProject(route.params.id as string)
   update(body)
 
-  router.push({name: "home"})
+  router.push({ name: "home" })
 
 }
 
