@@ -1,4 +1,4 @@
-import { ref } from "vue"
+import { ref, watchEffect } from "vue"
 import { ProjectBase, ProjectItem } from "@/types/ProjectItem"
 
 import { projectFirestore } from '@/firebase/config'
@@ -10,13 +10,21 @@ const loadProjects = () => {
   const load = async () => {
     try {
 
-      const response = await projectFirestore.collection('projects')
-        .orderBy("updated_at", "desc")
+      const projectCollection = projectFirestore.collection('projects')
+        .orderBy('updated_at', 'desc')
+
+      const unsub = projectCollection
         .onSnapshot((snap) => {
-          let docs = snap.docs.map((doc) => {
-            return { ...doc.data() as ProjectBase, id: doc.id }
+
+          const results: ProjectItem[] = []
+          snap.docs.map((doc) => {
+            doc.data().createdAt && results.push({ ...doc.data() as ProjectBase, id: doc.id })
           })
-          projects.value = docs
+          projects.value = results
+        })
+
+      watchEffect((onInvalidate) => {
+          onInvalidate(() => unsub())
         })
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -24,7 +32,10 @@ const loadProjects = () => {
         console.log(err.message)
       }
     }
+
   }
+
+
 
   return { projects: projects, error, load }
 }
